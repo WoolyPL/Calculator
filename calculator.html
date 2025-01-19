@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #333;
+    }
+    .calculator {
+      display: inline-block;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .calculator input {
+      width: 200px;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .calculator button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 5px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .calculator button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kalkulator</h1>
+  <div class="calculator">
+    <input type="number" id="num1" placeholder="Pierwsza liczba">
+    <input type="number" id="num2" placeholder="Druga liczba">
+    <br>
+    <button onclick="calculate('add')">Dodawanie</button>
+    <button onclick="calculate('subtract')">Odejmowanie</button>
+    <button onclick="calculate('multiply')">Mnożenie</button>
+    <button onclick="calculate('divide')">Dzielenie</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate(operation) {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const resultElement = document.getElementById('result');
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultElement.textContent = 'Proszę podać prawidłowe liczby!';
+        return;
+      }
+
+      let result;
+      switch (operation) {
+        case 'add':
+          result = num1 + num2;
+          break;
+        case 'subtract':
+          result = num1 - num2;
+          break;
+        case 'multiply':
+          result = num1 * num2;
+          break;
+        case 'divide':
+          if (num2 === 0) {
+            resultElement.textContent = 'Błąd: Dzielenie przez zero!';
+            return;
+          }
+          result = num1 / num2;
+          break;
+        default:
+          result = 'Nieznana operacja';
+      }
+
+      resultElement.textContent = `Wynik: ${result}`;
+    }
+  </script>
+</body>
+</html>
